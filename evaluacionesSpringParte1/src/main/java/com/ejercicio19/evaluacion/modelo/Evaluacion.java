@@ -4,69 +4,71 @@
  */
 package com.ejercicio19.evaluacion.modelo;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.util.Date;
 import lombok.Data;
+import java.io.Serializable;
+
 
 /**
  *
  * @author Abraham Yendes
  */
+@Entity
+@Table(name = "evaluaciones")
+@Data
+public class Evaluacion implements Serializable {
 
-public class Evaluacion {
+    private static final long serialVersionUID = 1L;
+    @Id
+    private int id;
+    private String nombre;
+    private int puntaje;
+    private float peso;
+    private Date fecha_evaluacion;
+    private int usuario_id;
 
-    private String id_eva;
-    private String nEvaluacion;
-    private String puntaje;
-    private String peso;
-    private String fecha_evaluacion;
-    private Usuario usuario;
 
-    public String getId_eva() {
-        return id_eva;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setId_eva(String id_eva) {
-        this.id_eva = id_eva;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getnEvaluacion() {
-        return nEvaluacion;
-    }
-
-    public void setnEvaluacion(String nEvaluacion) {
-        this.nEvaluacion = nEvaluacion;
-    }
-
-    public String getPuntaje() {
+    public int getPuntaje() {
         return puntaje;
     }
 
-    public void setPuntaje(String puntaje) {
+    public void setPuntaje(int puntaje) {
         this.puntaje = puntaje;
     }
 
-    public String getPeso() {
+    public float getPeso() {
         return peso;
     }
 
-    public void setPeso(String peso) {
+    public void setPeso(float peso) {
         this.peso = peso;
     }
 
-    public String getFecha_evaluacion() {
+    public Date getFecha_evaluacion() {
         return fecha_evaluacion;
     }
 
-    public void setFecha_evaluacion(String fecha_evaluacion) {
+    public void setFecha_evaluacion(Date fecha_evaluacion) {
         this.fecha_evaluacion = fecha_evaluacion;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public int getUsuario_id() {
+        return usuario_id;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuario(int usuario_id) {
+        this.usuario_id = usuario_id;
     }
 
     

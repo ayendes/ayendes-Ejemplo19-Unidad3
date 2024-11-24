@@ -4,17 +4,26 @@
  */
 package com.ejercicio19.evaluacion.modelo;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.util.Date;
-import java.util.logging.Logger;
 import lombok.Data;
+import java.io.Serializable;
 
 /**
  *
  * @author Abraham Yendes
  */
-public class Usuario {
 
-    private int id_usuario;
+@Entity
+@Table(name = "usuarios")
+@Data
+public class Usuario implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    private int id;
     private String password;
     private String nombre;
     private String apellidos;
@@ -27,12 +36,12 @@ public class Usuario {
     public Usuario() {
     }
 
-    public int getId_usuario() {
-        return id_usuario;
+    public int getId() {
+        return id;
     }
 
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPassword() {
