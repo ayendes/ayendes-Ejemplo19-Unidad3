@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+
+-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"> 
+    <head>
+        <title>DATOS DE EVALUACION</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <div>Datos de Evaluacion</div>
+        <a th:href="@{/}">REGRESAR</a>
+        <br/>
+        <form th:action="@{/guardar}" method="POST" th:object="${evaluacion}">
+            <br/>
+            <label for="nombre">NOMBRE</label>
+            <input type="text" name="nombre" th:field="*{nombre}"required/>
+            <br/>
+            <label for="puntaje">PUNTAJE</label>
+            <input type="text" name="puntaje" th:field="*{puntaje}"required/>
+            <br/>
+            <label for="peso">PESO</label>
+            <input type="text" name="peso" th:field="*{peso}"required/>
+            <br/>
+            <label for="fecha_evaluacion">FECHA DE EVALUACION</label>
+            <input type="text" name="fecha_evaluacion" th:field="*{fecha_evaluacion}"required/>
+            <br/>
+            <label for="usuario_id">NOMBRE DE USUARIO</label>
+            <input type="text" name="usuario_id" th:field="*{usuario_id}"required/>
+            <br/>
+            <input type="reset" value="LIMPIAR"/>&nbsp;&nbsp;&nbsp;
+            <input type="submit" name="guardar" value="GUARDAR"/>
+        </form>
+    </body>
+</html>

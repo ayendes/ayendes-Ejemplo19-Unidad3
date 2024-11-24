@@ -4,6 +4,8 @@
  */
 package com.ejercicio19.evaluacion.controladores;
 
+import lombok.extern.slf4j.Slf4j;
+import com.ejercicio19.evaluacion.servicio.IEvaluacionServicio;
 import com.ejercicio19.evaluacion.dao.IEvaluacionCrud;
 import org.springframework.beans.factory.annotation.Autowire;
 import org.apache.logging.log4j.LogManager;
@@ -11,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.beans.factory.annotation.Value;
 import com.ejercicio19.evaluacion.modelo.Evaluacion;
 import com.ejercicio19.evaluacion.modelo.Usuario;
@@ -22,20 +25,24 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  *
  * @author Abraham Yendes
  */
+@EnableTransactionManagement
 @Controller
-
+@Slf4j
 public class ControladorInicio {
 
     //@Value("${index.mensaje}")
     //String dato;
     private static final Logger logger = LogManager.getLogger(ControladorInicio.class);
     @Autowired
-    IEvaluacionCrud evaluacionCrud;
+    //IEvaluacionCrud evaluacionCrud;
+    IEvaluacionServicio evaluacionServicio;
+    
     @GetMapping("/")
     public String inicio(Model model) {
 
@@ -64,9 +71,21 @@ public class ControladorInicio {
         List<Evaluacion> listaEvaluaciones = Arrays.asList(e2, e3);
         model.addAttribute("evaluaciones", listaEvaluaciones);
 */  
-        List<Evaluacion> listaEvaluaciones = (List<Evaluacion>) evaluacionCrud.findAll();
+        //List<Evaluacion> listaEvaluaciones = (List<Evaluacion>) evaluacionCrud.findAll();
+        List<Evaluacion> listaEvaluaciones = (List<Evaluacion>) evaluacionServicio.listarEvaluaciones();
         model.addAttribute("evaluaciones", listaEvaluaciones);
         logger.info("Ejecutando el controlador inicio");
         return "index";
+    }
+    
+    @GetMapping("/agregar")
+    public String agregar(Evaluacion evaluacion) {
+        return "modificar";
+    }
+    
+    @GetMapping("/guardar")
+    public String guardar(Evaluacion evaluacion) {
+        evaluacionServicio.guardar(evaluacion);
+        return "redirect:/";
     }
 }

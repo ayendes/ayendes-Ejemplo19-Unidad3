@@ -21,7 +21,7 @@ import java.io.Serializable;
 @Data
 public class Evaluacion implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final int serialVersionUID = 1;
     @Id
     private int id;
     private String nombre;
@@ -69,6 +69,10 @@ public class Evaluacion implements Serializable {
 
     public void setUsuario(int usuario_id) {
         this.usuario_id = usuario_id;
+    }
+
+    public Evaluacion orElse(Object object) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     
