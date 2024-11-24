@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+index.html desde Spring
+-->
+<html xmlns:th="http://www.thymeleaf.org"> 
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>PAGINA DE INICIO</div>
+        <p th:text="${mensaje}"></p>
+        <p th:text="${dato}"></p>
+        <hr>
+        <b>Nombre: </b><span th:text="${nota.nEvaluacion}"></span><br>
+        <b>Puntaje: </b><span th:text="${nota.puntaje}"></span><br>
+        <b>Peso: </b><span th:text="${nota.peso}"></span><br>
+        <b>Fecha de Evaluacion: </b><span th:text="${nota.fecha_evaluacion}"></span><br>
+        <hr>
+        <h4>LISTA DE EVALUACIONES</h4>
+        <hr>
+        <div th:if="${evaluaciones != null and !evaluaciones.empty}">
+            <table border="1">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Puntaje</th>
+                    <th>Peso</th>
+                    <th>Fecha de Evaluacion</th>
+                </tr>
+                <tr th:each="u: ${evaluaciones}">
+                    <td th:text="${e.nEvaluacion}"></td>
+                    <td th:text="${e.puntaje}"></td>
+                    <td th:text="${e.peso}"></td>
+                    <td th:text="${e.fecha_evaluacion}"></td>
+                </tr>
+            </table>
+        </div>
+        <div th:if="${evaluaciones == null or evaluaciones.empty}">
+            La lista esta vacia
+        </div>
+    </body>
+</html>
