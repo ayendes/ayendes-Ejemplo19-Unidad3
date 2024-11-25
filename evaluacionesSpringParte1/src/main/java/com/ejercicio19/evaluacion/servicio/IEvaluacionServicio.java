@@ -6,6 +6,7 @@ package com.ejercicio19.evaluacion.servicio;
 
 import java.util.List;
 import com.ejercicio19.evaluacion.modelo.Evaluacion;
+import com.ejercicio19.evaluacion.modelo.Usuario;
 
 /**
  *
@@ -20,4 +21,7 @@ public interface IEvaluacionServicio {
     public void eliminar (Evaluacion evaluacion);
     
     public Evaluacion buscar (int id);
+    
+    public void asignarNombreUsuario(int evaluacionId, Usuario usuario);
+
 }

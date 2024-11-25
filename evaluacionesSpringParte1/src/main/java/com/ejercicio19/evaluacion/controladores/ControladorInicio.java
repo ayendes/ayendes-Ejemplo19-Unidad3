@@ -25,7 +25,13 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
@@ -34,6 +40,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @Controller
 @Slf4j
+
 public class ControladorInicio {
 
     //@Value("${index.mensaje}")
@@ -83,9 +90,16 @@ public class ControladorInicio {
         return "modificar";
     }
     
-    @GetMapping("/guardar")
-    public String guardar(Evaluacion evaluacion) {
+    @PostMapping("/guardar")
+    public String guardar(@ModelAttribute Evaluacion evaluacion) {    
         evaluacionServicio.guardar(evaluacion);
-        return "redirect:/";
+        return "redirect:/evaluaciones/";
+    }
+
+    @RequestMapping("/evaluaciones") // Cambia la ruta base
+    @PostMapping("/{evaluacionId}/asignar-usuario")
+    public ResponseEntity<String> asignarUsuario(@PathVariable int evaluacionId, @ModelAttribute Usuario usuario) {
+        evaluacionServicio.asignarNombreUsuario(evaluacionId, usuario);
+        return ResponseEntity.ok("Nombre de usuario asignado correctamente");
     }
 }

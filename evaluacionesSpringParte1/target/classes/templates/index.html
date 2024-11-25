@@ -3,45 +3,83 @@
 index.html desde Spring
 -->
 <html xmlns:th="http://www.thymeleaf.org"> 
-    <head>
-        <title>EJEMPLO DE CRUD MVC CON SPRING BOOT</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>PAGINA DE INICIO</div>
-        <a th:href="@{/agregar}">AGREGAR Evaluacion</a>
-        <h4>LISTA DE EVALUACIONES</h4>
-        <!--<p th:text="${mensaje}"></p>
-        <p th:text="${dato}"></p>
-        <hr>
-        <b>Nombre: </b><span th:text="${nota.nEvaluacion}"></span><br>
-        <b>Puntaje: </b><span th:text="${nota.puntaje}"></span><br>
-        <b>Peso: </b><span th:text="${nota.peso}"></span><br>
-        <b>Fecha de Evaluacion: </b><span th:text="${nota.fecha_evaluacion}"></span><br>-->
-        <hr>
-        <!--<h4>LISTA DE EVALUACIONES</h4>-->
-        <hr>
-        <div th:if="${evaluaciones != null and !evaluaciones.empty}">
-            <table border="1">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Puntaje</th>
-                    <th>Peso</th>
-                    <th>Fecha de Evaluacion</th>
-                    <th>Nombre de Usuario</th>
-                </tr>
-               <tr th:each="e: ${evaluaciones}">
-                    <td th:text="${e.nombre}"></td>
-                    <td th:text="${e.puntaje}"></td>
-                    <td th:text="${e.peso}"></td>
-                    <td th:text="${e.fecha_evaluacion}"></td>
-                    <td th:text="${e.usuario_id}"></td>
-                </tr>
-            </table>
-        </div>
-        <div th:if="${evaluaciones == null or evaluaciones.empty}">
-            La lista esta vacia
-        </div>
-    </body>
+<head>
+    <title>EJEMPLO DE CRUD MVC CON SPRING BOOT</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        a {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        .empty-message {
+            color: #ff0000;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>PAGINA DE INICIO</h1>
+    <a th:href="@{/agregar}">Agregar Evaluacion</a>
+    <hr>
+    <div th:if="${evaluaciones != null and !evaluaciones.empty}">
+        <table>
+            <tr>
+                <th>Nombre</th>
+                <th>Puntaje</th>
+                <th>Peso</th>
+                <th>Fecha de Evaluacion</th>
+                <th>Nombre de Usuario</th>
+            </tr>
+            <tr th:each="e: ${evaluaciones}">
+                <td th:text="${e.nombre}"></td>
+                <td th:text="${e.puntaje}"></td>
+                <td th:text="${e.peso}"></td>
+                <td th:text="${e.fecha_evaluacion}"></td>
+                <td th:text="${e.usuario_id}"></td>
+            </tr>
+        </table>
+    </div>
+    <div th:if="${evaluaciones == null or evaluaciones.empty}" class="empty-message">
+        La lista está vacía
+    </div>
+</body>
 </html>

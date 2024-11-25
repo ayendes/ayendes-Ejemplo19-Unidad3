@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
+import com.ejercicio19.evaluacion.modelo.Usuario;
 
 /**
  *
@@ -51,6 +51,15 @@ public class EvaluacionServicioImp implements IEvaluacionServicio {
     @Override
     public Evaluacion buscar(int id) {
         return evaluacionCrud.findById(id).orElse(null);
+    }
+
+    @Override
+    public void asignarNombreUsuario(int evaluacionId, Usuario usuario) {
+        Evaluacion evaluacion = evaluacionCrud.findById(evaluacionId).orElse(null);
+        if (evaluacion != null && usuario != null) {
+            evaluacion.asignarNombreUsuario(usuario);
+            evaluacionCrud.save(evaluacion); // Guarda la evaluación actualizada
+        }
     }
     
 }
