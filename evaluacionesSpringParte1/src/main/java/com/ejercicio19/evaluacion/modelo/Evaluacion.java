@@ -5,6 +5,8 @@
 package com.ejercicio19.evaluacion.modelo;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.util.Date;
@@ -12,20 +14,19 @@ import lombok.Data;
 import java.io.Serializable;
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 /**
  *
  * @author Abraham Yendes
  */
-
 @Entity
 @Table(name = "evaluaciones")
 @Data
 public class Evaluacion implements Serializable {
 
-    private static final int serialVersionUID = 1;
+    private static final long serialVersionUID = 1L;
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Si el ID es autogenerado
+    private long evaId;
     private String nombre;
     private int puntaje;
     private float peso;
@@ -33,15 +34,18 @@ public class Evaluacion implements Serializable {
     private Date fecha_evaluacion;
     private int usuario_id;
 
-
-    // Método para asignar el nombre del usuario
-    public void asignarNombreUsuario(Usuario usuario) {
-        if (usuario != null) {
-            this.nombre = usuario.getNombre(); // Asigna el nombre del usuario
-            this.usuario_id = usuario.getId(); // Asigna el ID del usuario
-        }
+    public Evaluacion() {
     }
-    
+
+    // Métodos getter y setter
+    public long getEvaId() {
+        return evaId;
+    }
+
+    public void setEvaId(long evaId) {
+        this.evaId = evaId;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -78,13 +82,21 @@ public class Evaluacion implements Serializable {
         return usuario_id;
     }
 
-    public void setUsuario(int usuario_id) {
+    public void setUsuario_id(int usuario_id) {
         this.usuario_id = usuario_id;
     }
 
-    public Evaluacion orElse(Object object) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Evaluacion orElse(Evaluacion evaluacion) {
+        if (this == null) {
+            // Si la instancia actual es null, devuelve una nueva Evaluacion
+            // Asegúrate de que el objeto sea del tipo adecuado
+            if (evaluacion instanceof Evaluacion) {
+                return (Evaluacion) evaluacion; // Devuelve el objeto pasado como parámetro
+            } else {
+                // Manejo si el objeto no es de tipo Evaluacion
+                throw new IllegalArgumentException("El objeto proporcionado no es una instancia de Evaluacion.");
+            }
+        }
+        return this; // Si no es null, devuelve la instancia actual
     }
-
-    
 }

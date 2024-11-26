@@ -1,5 +1,5 @@
 /*
- * 
+ * Implementacion de Servicio de Evaluacion
  * 
  */
 package com.ejercicio19.evaluacion.servicio;
@@ -9,10 +9,9 @@ import com.ejercicio19.evaluacion.dao.IEvaluacionCrud;
 import com.ejercicio19.evaluacion.modelo.Evaluacion;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import com.ejercicio19.evaluacion.modelo.Usuario;
+
 
 /**
  *
@@ -49,17 +48,8 @@ public class EvaluacionServicioImp implements IEvaluacionServicio {
     @Transactional //(readOnly = true)
 
     @Override
-    public Evaluacion buscar(int id) {
-        return evaluacionCrud.findById(id).orElse(null);
-    }
-
-    @Override
-    public void asignarNombreUsuario(int evaluacionId, Usuario usuario) {
-        Evaluacion evaluacion = evaluacionCrud.findById(evaluacionId).orElse(null);
-        if (evaluacion != null && usuario != null) {
-            evaluacion.asignarNombreUsuario(usuario);
-            evaluacionCrud.save(evaluacion); // Guarda la evaluación actualizada
-        }
+    public Evaluacion buscar(int evaId) {
+        return evaluacionCrud.findById(evaId).orElse(null);
     }
     
 }
