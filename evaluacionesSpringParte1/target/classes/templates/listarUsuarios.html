@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--
+Formulario para Mostrar Lista de Usuarios
+-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"> 
+    <head>
+        <title>DATOS DE EVALUACION</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        a {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        .empty-message {
+            color: #ff0000;
+            font-weight: bold;
+        }
+    </style>
+    </head>
+    <body>
+        <h1>[[#{usuario.formulario}]]</h1>
+        <a th:href="@{/}">[[#{enlace.regresar}]]</a>
+        <br/>
+        <hr>
+    <div th:if="${usuarios != null and !usuarios.empty}">
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Password</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Rol</th>
+                <th>Email</th>
+                <th>Telefono</th>
+                <th>Estado</th>
+                <th>Fecha de Registro</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+            <tr th:each="u: ${usuarios}">
+                
+                <td th:text="${u.userId}"></td>
+                <td th:text="${u.password}"></td>
+                <td th:text="${u.nombre}"></td>
+                <td th:text="${u.apellidos}"></td>
+                <td th:text="${u.rol}"></td>
+                <td th:text="${u.email}"></td>
+                <td th:text="${u.telefono}"></td>
+                <td th:text="${u.estado}"></td>
+                <td th:text="${#dates.format(u.fecha_registro, 'yyyy-MM-dd')}"></td>
+               
+                <td><a th:href="@{/editarUsuario/}+${u.userId}" th:text="editar"></a></td>
+                <td><a th:href="@{/eliminarUsuario(userId=${u.userId})}" th:text="eliminar"></a></td>
+            </tr>
+        </table>
+    </div>
+    <div th:if="${usuarios == null or usuarios.empty}" class="empty-message">
+        La lista está vacía
+    </div>
+    </body>
+</html>

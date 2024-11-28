@@ -57,73 +57,10 @@ index.html desde Spring
     </style>
 </head>
 <body>
+    <header th:replace="plantillas/partes:: cabecero"></header>
     <h1>PAGINA DE INICIO</h1>
-    <a th:href="@{/agregarEvaluacion}">Agregar Evaluacion</a>
     <hr>
-    <div th:if="${evaluaciones != null and !evaluaciones.empty}">
-        <table>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Puntaje</th>
-                <th>Peso</th>
-                <th>Fecha de Evaluacion</th>
-                <th>Nombre de Usuario</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
-            </tr>
-            <tr th:each="e: ${evaluaciones}">
-                <td th:text="${e.evaId}"></td>
-                <td th:text="${e.nombre}"></td>
-                <td th:text="${e.puntaje}"></td>
-                <td th:text="${e.peso}"></td>
-                <td th:text="${#dates.format(e.fecha_evaluacion, 'yyyy-MM-dd')}"></td>
-                <td th:text="${e.usuario_id}"></td>
-                
-                <td><a th:href="@{/editarEvaluacion/}+${e.evaId}" th:text="editar"></a></td>
-                <td><a th:href="@{/eliminarEvaluacion(evaId= ${e.evaId})}" th:text="eliminar"></a></td>
-            </tr>
-        </table>
-    </div>
-    <div th:if="${evaluaciones == null or evaluaciones.empty}" class="empty-message">
-        La lista está vacía
-    </div>
-    <a th:href="@{/agregarUsuario}">Agregar Usuario</a>
-    <hr>
-    <div th:if="${usuarios != null and !usuarios.empty}">
-        <table>
-            <tr>
-                <th>Id</th>
-                <th>Password</th>
-                <th>Nombre</th>
-                <th>Apellidos</th>
-                <th>Rol</th>
-                <th>Email</th>
-                <th>Telefono</th>
-                <th>Estado</th>
-                <th>Fecha de Registro</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
-            </tr>
-            <tr th:each="u: ${usuarios}">
-                
-                <td th:text="${u.userId}"></td>
-                <td th:text="${u.password}"></td>
-                <td th:text="${u.nombre}"></td>
-                <td th:text="${u.apellidos}"></td>
-                <td th:text="${u.rol}"></td>
-                <td th:text="${u.email}"></td>
-                <td th:text="${u.telefono}"></td>
-                <td th:text="${u.estado}"></td>
-                <td th:text="${#dates.format(u.fecha_registro, 'yyyy-MM-dd')}"></td>
-               
-                <td><a th:href="@{/editarUsuario/}+${u.userId}" th:text="editar"></a></td>
-                <td><a th:href="@{/eliminarUsuario(userId=${u.userId})}" th:text="eliminar"></a></td>
-            </tr>
-        </table>
-    </div>
-    <div th:if="${usuarios == null or usuarios.empty}" class="empty-message">
-        La lista está vacía
-    </div>
+     <br/><hr>
+    <footer th:replace="plantillas/partes:: pie"></footer>
 </body>
 </html>

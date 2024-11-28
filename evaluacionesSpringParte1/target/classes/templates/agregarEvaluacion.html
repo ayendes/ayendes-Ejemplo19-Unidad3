@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<!--
+Pagina para Registrar una Evaluacion
+-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"> 
+    <head>
+        <title>DATOS DE EVALUACION</title>
+        <meta charset="UTF-8">
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    margin: 0;
+                    padding: 20px;
+                    background-color: #f4f4f4;
+                }
+                h1 {
+                    color: #333;
+                    text-align: center;
+                    margin-bottom: 20px;
+                }
+                a {
+                    display: inline-block;
+                    margin: 20px 0;
+                    padding: 10px 15px;
+                    background-color: #007bff;
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 5px;
+                    transition: background-color 0.3s;
+                }
+                a:hover {
+                    background-color: #0056b3;
+                }
+                form {
+                    background-color: white;
+                    padding: 20px;
+                    border-radius: 5px;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                    max-width: 400px;
+                    margin: 20px auto;
+                }
+                label {
+                    display: block;
+                    margin-bottom: 5px;
+                    font-weight: bold;
+                }
+                input[type="text"],
+                input[type="date"] {
+                    width: calc(100% - 20px);
+                    padding: 10px;
+                    margin-bottom: 15px;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                }
+                input[type="reset"],
+                input[type="submit"] {
+                    background-color: #007bff;
+                    color: white;
+                    padding: 10px 15px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                }
+                input[type="reset"]:hover,
+                input[type="submit"]:hover {
+                    background-color: #0056b3;
+                }
+            </style>
+    </head>
+    <body>
+        <h1>[[#{evaluacion.formulario}]]</h1>
+        <a th:href="@{/}">[[#{enlace.regresar}]]</a>
+        <br/>
+        <form th:action="@{/guardarEvaluacion}" method="POST" th:object="${evaluacion}">
+            <br>
+
+                <label for="nombre" th:text="#{evaluacion.nombre}">NOMBRE</label>
+                <input type="text" name="nombre" th:field="*{nombre}" />
+                <span th:if="${#fields.hasErrors('nombre')}" th:errores="*{nombre}">El nombre es requerido</span>
+
+                <label for="puntaje" th:text="#{evaluacion.puntaje}">PUNTAJE</label>
+                <input type="text" name="puntaje" th:field="*{puntaje}" />
+                <span th:if="${#fields.hasErrors('puntaje')}" th:errores="*{puntaje}">El puntaje es requerido</span>
+
+                <label for="peso" th:text="#{evaluacion.peso}">PESO</label>
+                <input type="text" name="peso" th:field="*{peso}" />
+                <span th:if="${#fields.hasErrors('peso')}" th:errores="*{peso}">El peso es requerido</span>
+
+                <label for="fecha_evaluacion" th:text="#{evaluacion.fecha_evaluacion}">FECHA DE EVALUACION</label>
+                <input type="date" name="fecha_evaluacion" th:field="*{fecha_evaluacion}" />
+                <span th:if="${#fields.hasErrors('fecha_evaluacion')}" th:errores="*{fecha_evaluacion}">La fecha es requerida</span>
+
+                <label for="usuario_id" th:text="#{evaluacion.usuario_id}">NOMBRE DE USUARIO</label>
+                <input type="text" name="usuario_id" th:field="*{usuario_id}" />
+                <span th:if="${#fields.hasErrors('usuario_id')}" th:errores="*{usuario_id}">El nombre de Usuario es requerido</span>
+
+                <input type="reset" th:value="#{accion.reiniciar}"/>&nbsp;&nbsp;&nbsp;
+                <input type="submit" name="guardar" th:value="#{accion.agregar}"/>
+        </form>
+    </body>
+</html>
+
+

@@ -4,11 +4,17 @@
  */
 package com.ejercicio19.evaluacion.modelo;
 
+
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import java.util.Date;
 import lombok.Data;
 import java.io.Serializable;
@@ -20,27 +26,36 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "usuarios", catalog = "ejercicio19")
 @Data
 public class Usuario implements Serializable{
 
     private static final Long serialVersionUID = 1L;
     @Id
+    @Basic(optional = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Si el ID es autogenerado
+    @Column(name = "userId", nullable = false, length = 15)
     private long userId;
+    @NotEmpty
     private String password;
+    @NotEmpty
     private String nombre;
+    @NotEmpty
     private String apellidos;
+    @NotEmpty
     private String rol;
+    @Email
     private String email;
+    @NotEmpty
     private String telefono;
+    @NotEmpty
     private String estado;
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha_registro;
 
     public Usuario() {
     }
-    
     
 
      // Métodos getter y setter
@@ -125,7 +140,7 @@ public class Usuario implements Serializable{
                 return (Usuario) usuario; // Devuelve el objeto pasado como parámetro
             } else {
                 // Manejo si el objeto no es de tipo Evaluacion
-                throw new IllegalArgumentException("El objeto proporcionado no es una instancia de Evaluacion.");
+                throw new IllegalArgumentException("El objeto proporcionado no es una instancia de Usuario.");
             }
         }
         return this; // Si no es null, devuelve la instancia actual

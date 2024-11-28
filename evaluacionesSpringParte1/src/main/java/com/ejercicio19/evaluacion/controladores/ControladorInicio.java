@@ -19,7 +19,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
+import javax.validation.Valid;
+import org.springframework.validation.Errors;
 /**
  *
  * @author Abraham Yendes
@@ -48,14 +49,19 @@ public class ControladorInicio {
         logger.info("Ejecutando el controlador inicio");
         return "index";
     }
+    
+    // Mapping Evaluaciones
 
     @GetMapping("/agregarEvaluacion")
     public String agregar(Evaluacion evaluacion) {
-        return "modificarEvaluacion";
+        return "agregarEvaluacion";
     }
 
     @PostMapping("/guardarEvaluacion")
-    public String guardar(@ModelAttribute Evaluacion evaluacion) {
+    public String guardar(@Valid @ModelAttribute ("evaluacion") Evaluacion evaluacion, Errors errores) {
+        if(errores.hasErrors()){
+            return "modificarEvaluacion";
+        }
         evaluacionServicio.guardar(evaluacion);
         return "redirect:/";
     }
@@ -76,14 +82,26 @@ public class ControladorInicio {
         evaluacionServicio.eliminar(evaluacion);
         return "redirect:/";
     }
+    
+    @GetMapping("/listarEvaluaciones")
+    public String listaTodas(Evaluacion evaluacion, Model model) {
+        List<Evaluacion> listaEvaluaciones = (List<Evaluacion>) evaluacionServicio.listarEvaluaciones();
+        model.addAttribute("evaluaciones", listaEvaluaciones);
+        return "listarEvaluaciones";
+    }
+    
+    //Mapping Tabla Usuarios
 
     @GetMapping("/agregarUsuario")
     public String agregar(Usuario usuario) {
-        return "modificarUsuario";
+        return "agregarUsuario";
     }
 
     @PostMapping("/guardarUsuario")
-    public String guardar(@ModelAttribute Usuario usuario) {
+    public String guardar(@Valid @ModelAttribute("usuario") Usuario usuario, Errors errores) {
+        if(errores.hasErrors()){
+            return "modificarUsuario";
+        }
         usuarioServicio.guardar(usuario);
         return "redirect:/";
     }
@@ -102,5 +120,12 @@ public class ControladorInicio {
     public String eliminar(Usuario usuario) {
         usuarioServicio.eliminar(usuario);
         return "redirect:/";
+    }
+    
+    @GetMapping("/listarUsuarios")
+    public String listaTodas(Usuario usuario, Model model) {
+        List<Usuario> listaUsuarios = (List<Usuario>) usuarioServicio.listarUsuarios();
+        model.addAttribute("usuarios", listaUsuarios);
+        return "listarUsuarios";
     }
 }

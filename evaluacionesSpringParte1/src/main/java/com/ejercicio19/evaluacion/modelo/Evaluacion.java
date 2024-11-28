@@ -4,11 +4,15 @@
  */
 package com.ejercicio19.evaluacion.modelo;
 
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import java.util.Date;
 import lombok.Data;
 import java.io.Serializable;
@@ -19,17 +23,22 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author Abraham Yendes
  */
 @Entity
-@Table(name = "evaluaciones")
+@Table(name = "evaluaciones", catalog = "ejercicio19")
 @Data
 public class Evaluacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Si el ID es autogenerado
+    @Column(name = "evaId", nullable = false, length = 15)
     private long evaId;
+    @NotEmpty
     private String nombre;
+    @NotNull
     private int puntaje;
+    @NotNull
     private float peso;
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha_evaluacion;
     private int usuario_id;

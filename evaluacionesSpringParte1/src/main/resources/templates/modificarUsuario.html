@@ -94,48 +94,60 @@ Pagina para registrar y Modificar Usuario
             </style>
     </head>
     <body>
-        <h1>Datos de Usuario</h1>
-        <a th:href="@{/}">REGRESAR</a>
+        <h1>[[#{usuario.formulario}]]</h1>
+        <a th:href="@{/}">[[#{enlace.regresar}]]</a>
         <br/>
         <form th:action="@{/guardarUsuario}" method="POST" th:object="${usuario}">
-            <label for="nombre">NOMBRE</label>
-            <input type="text" name="nombre" th:field="*{nombre}" required/>
 
-            <label for="apellidos">APELLIDOS</label>
-            <input type="text" name="apellidos" th:field="*{apellidos}" required/>
+            <label for="userId" th:text="#{usuario.userId}">ID</label>
+            <input type="text" name="userId" th:field="*{userId}" />
+            <span th:if="${#fields.hasErrors('userId')}" th:errores="*{UserId}">El nombre es requerido</span>
 
-            <label for="password">PASSWORD</label>
+            <label for="nombre" th:text="#{usuario.nombre}">NOMBRE</label>
+            <input type="text" name="nombre" th:field="*{nombre}" />
+            <span th:if="${#fields.hasErrors('nombre')}" th:errores="*{nombre}">El nombre es requerido</span>
+
+            <label for="apellidos" th:text="#{usuario.apellidos}">APELLIDOS</label>
+            <input type="text" name="apellidos" th:field="*{apellidos}"/>
+            <span th:if="${#fields.hasErrors('apellidos')}" th:errores="*{apellidos}">El apellido es requerido</span>
+
+            <label for="password" th:text="#{usuario.password}">PASSWORD</label>
             <div class="password-container">
-                <input type="text" id="password" name="password" th:field="*{password}" required/>
-
+                <input type="text" id=" password" name="password" th:field="*{password}"/>
+                <span th:if="${#fields.hasErrors('password')}" th:errores="*{password}">El password es requerido</span>
             </div>
 
-            <label for="rol">ROL</label>
-            <select name="rol" th:field="*{rol}" required>
+            <label for="rol" th:text="#{usuario.rol}">ROL</label>
+            <select name="rol" th:field="*{rol}">
                 <option value="">Seleccione</option>
                 <option value="Administrador">Administrador</option>
                 <option value="Usuario">Usuario</option>
             </select>
+            <span th:if="${#fields.hasErrors('rol')}" th:errores="*{rol}">Elige un Rol</span>
 
-            <label for="email">EMAIL</label>
-            <input type="email" name="email" th:field="*{email}" placeholder="you@email.com" required/>
+            <label for="email" th:text="#{usuario.email}">EMAIL</label>
+            <input type="email" name="email" th:field="*{email}" placeholder="you@email.com"/>
+            <span th:if="${#fields.hasErrors('email')}" th:errores="*{email}">El email es requerido</span>
 
-            <label for="telefono">TELEFONO</label>
-            <input type="text" name="telefono" th:field="*{telefono}" required/>
+            <label for="telefono" th:text="#{usuario.telefono}">TELEFONO</label>
+            <input type="text" name="telefono" th:field="*{telefono}"/>
+            <span th:if="${#fields.hasErrors('telefono')}" th:errores="*{telefono}">El telefono es requerido</span>
 
-            <label for="estado">ESTADO</label>
-            <select name="estado" th:field="*{estado}" required>
+            <label for="estado" th:text="#{usuario.estado}">ESTADO</label>
+            <select name="estado" th:field="*{estado}">
                 <option value="">Seleccione</option>
                 <option value="Activo">Activo</option>
                 <option value="Inactivo">Inactivo</option>
             </select>
+            <span th:if="${#fields.hasErrors('estado')}" th:errores="*{estado}">El estado es requerido</span>
 
-            <label for="fecha_registro">FECHA DE REGISTRO</label>
-            <input type="date" name="fecha_registro" th:field="*{fecha_registro}" required/>
+            <label for="fecha_registro" th:text="#{usuario.fecha_registro}">FECHA DE REGISTRO</label>
+            <input type="date" name="fecha_registro" th:field="*{fecha_registro}"/>
+            <span th:if="${#fields.hasErrors('fecha_registro')}" th:errores="*{fecha_registro}">Elige fecha</span>
 
             <div class="button-container">
-                <input type="reset" value="LIMPIAR"/>
-                <input type="submit" name="guardar" value="GUARDAR"/>
+                <input type="reset" th:value="#{accion.reiniciar}"/> &nbsp;&nbsp;&nbsp;
+                <input type="submit" name="guardar" th:value="#{accion.agregar}"/>
             </div>
         </form>
     </body>

@@ -71,32 +71,38 @@ Pagina para modificar Evaluacion
     </style>
 </head>
 <body>
-    <h1>Datos de Evaluación</h1>
-    <a th:href="@{/}">REGRESAR</a>
+    <h1>[[#{evaluacion.formulario}]]</h1>
+    <a th:href="@{/}">[[#{enlace.regresar}]]</a>
     <br/>
     <form th:action="@{/guardarEvaluacion}" method="POST" th:object="${evaluacion}">
         <br>
             
-        <label for="evaId">ID</label>
+        <label for="evaId" th:text="#{evaluacion.evaId}">ID</label>
         <input type="text" name="evaId" th:field="*{evaId}"/>
             
-        <label for="nombre">NOMBRE</label>
-        <input type="text" name="nombre" th:field="*{nombre}" required/>
+        <label for="nombre" th:text="#{evaluacion.nombre}">NOMBRE</label>
+        <input type="text" name="nombre" th:field="*{nombre}" />
+        <span th:if="${#fields.hasErrors('nombre')}" th:errores="*{nombre}">El nombre es requerido</span>
         
-        <label for="puntaje">PUNTAJE</label>
-        <input type="text" name="puntaje" th:field="*{puntaje}" required/>
+        <label for="puntaje" th:text="#{evaluacion.puntaje}">PUNTAJE</label>
+        <input type="text" name="puntaje" th:field="*{puntaje}" />
+        <span th:if="${#fields.hasErrors('puntaje')}" th:errores="*{puntaje}">El puntaje es requerido</span>
         
-        <label for="peso">PESO</label>
-        <input type="text" name="peso" th:field="*{peso}" required/>
+        <label for="peso" th:text="#{evaluacion.peso}">PESO</label>
+        <input type="text" name="peso" th:field="*{peso}" />
+        <span th:if="${#fields.hasErrors('peso')}" th:errores="*{peso}">El peso es requerido</span>
         
-        <label for="fecha_evaluacion">FECHA DE EVALUACION</label>
-        <input type="date" name="fecha_evaluacion" th:field="*{fecha_evaluacion}" required/>
+        <label for="fecha_evaluacion" th:text="#{evaluacion.fecha_evaluacion}">FECHA DE EVALUACION</label>
+        <input type="date" name="fecha_evaluacion" th:field="*{fecha_evaluacion}" />
+        <span th:if="${#fields.hasErrors('fecha_evaluacion')}" th:errores="*{fecha_evaluacion}">La fecha es requerida</span>
         
-        <label for="usuario_id">NOMBRE DE USUARIO</label>
-        <input type="text" name="usuario_id" th:field="*{usuario_id}" required/>
+        <label for="usuario_id" th:text="#{evaluacion.usuario_id}">NOMBRE DE USUARIO</label>
+        <input type="text" name="usuario_id" th:field="*{usuario_id}" />
+        <span th:if="${#fields.hasErrors('usuario_id')}" th:errores="*{usuario_id}">El nombre de Usuario es requerido</span>
         
-        <input type="reset" value="LIMPIAR"/>&nbsp;&nbsp;&nbsp;
-        <input type="submit" name="guardar" value="GUARDAR"/>
+        
+        <input type="reset" th:value="#{accion.reiniciar}"/>&nbsp;&nbsp;&nbsp;
+        <input type="submit" name="guardar" th:value="#{accion.agregar}"/>
     </form>
 </body>
 </html>

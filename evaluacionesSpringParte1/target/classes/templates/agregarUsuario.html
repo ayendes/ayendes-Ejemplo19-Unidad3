@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-Pagina para registrar y Modificar Usuario
+Pagina para registrar Usuarios
 -->
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml"> 
@@ -98,23 +98,19 @@ Pagina para registrar y Modificar Usuario
         <a th:href="@{/}">[[#{enlace.regresar}]]</a>
         <br/>
         <form th:action="@{/guardarUsuario}" method="POST" th:object="${usuario}">
-
-            <label for="userId" th:text="#{usuario.userId}">ID</label>
-            <input type="text" name="userId" th:field="*{userId}" />
-            <span th:if="${#fields.hasErrors('userId')}" th:errores="*{UserId}">El nombre es requerido</span>
-
             <label for="nombre" th:text="#{usuario.nombre}">NOMBRE</label>
             <input type="text" name="nombre" th:field="*{nombre}" />
             <span th:if="${#fields.hasErrors('nombre')}" th:errores="*{nombre}">El nombre es requerido</span>
 
             <label for="apellidos" th:text="#{usuario.apellidos}">APELLIDOS</label>
-            <input type="text" name="apellidos" th:field="*{apellidos}"/>
+            <input type="text" name="apellidos" th:field="*{apellidos}" />
             <span th:if="${#fields.hasErrors('apellidos')}" th:errores="*{apellidos}">El apellido es requerido</span>
 
             <label for="password" th:text="#{usuario.password}">PASSWORD</label>
             <div class="password-container">
-                <input type="text" id=" password" name="password" th:field="*{password}"/>
+                <input type="password" id="password" name="password" th:field="*{password}" />
                 <span th:if="${#fields.hasErrors('password')}" th:errores="*{password}">El password es requerido</span>
+
             </div>
 
             <label for="rol" th:text="#{usuario.rol}">ROL</label>
@@ -125,13 +121,13 @@ Pagina para registrar y Modificar Usuario
             </select>
             <span th:if="${#fields.hasErrors('rol')}" th:errores="*{rol}">Elige un Rol</span>
 
+
             <label for="email" th:text="#{usuario.email}">EMAIL</label>
             <input type="email" name="email" th:field="*{email}" placeholder="you@email.com"/>
             <span th:if="${#fields.hasErrors('email')}" th:errores="*{email}">El email es requerido</span>
 
             <label for="telefono" th:text="#{usuario.telefono}">TELEFONO</label>
             <input type="text" name="telefono" th:field="*{telefono}"/>
-            <span th:if="${#fields.hasErrors('telefono')}" th:errores="*{telefono}">El telefono es requerido</span>
 
             <label for="estado" th:text="#{usuario.estado}">ESTADO</label>
             <select name="estado" th:field="*{estado}">
